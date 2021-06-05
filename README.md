@@ -1,2 +1,2 @@
-# cloud-danda
+# cloud-berserk
 Cloud Exploit Framework
