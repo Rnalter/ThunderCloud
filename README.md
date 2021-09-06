@@ -1,2 +1,2 @@
-# cloud-berserk
+# ThunderCloud
 Cloud Exploit Framework
